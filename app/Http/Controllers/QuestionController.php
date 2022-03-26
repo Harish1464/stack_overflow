@@ -87,7 +87,7 @@ class QuestionController extends Controller
      */
     public function update(Request $request, Question $question)
     {
-        $this-authorize('update', $question);
+        $this->authorize('update', $question);
         $this->validate($request, [
             'title' => 'required|min:10',
             'description'  => 'required|min:100',
@@ -109,7 +109,7 @@ class QuestionController extends Controller
      */
     public function destroy(Question $question)
     {
-        $this-authorize('update', $question);
+        $this->authorize('update', $question);
         $question->delete();
         return redirect()->route('question.index')->withError("Question deleted!");
     }

@@ -19,6 +19,8 @@ class QuestionPolicy
      */
     public function update(User $user, Question $question)
     {
+        // if($comment->user_id !== auth()->user()->id)
+        //     abort('401');
         return $question->user_id == $user->id;
     }
 }

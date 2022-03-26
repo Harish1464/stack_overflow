@@ -11,11 +11,11 @@
         </a>
         <div class="d-flex w-100 justify-content-start">
             @can('update', $question)
-                <a href="{{route('question.edit', $question)}}" class="p-2">Edit</a>            
+                <a href="{{route('question.edit', $question)}}" class="p-2"><i class="fa fa-pen"></i> Edit</a>            
                 <a href="javascript:;" id="delete-btn" class="p-2"> <i class="fa fa-trash"></i> Delete</a>
                 <form action="{{route('question.delete', $question)}}" method="delete"></form>
             @endcan
-            <a href="" class="p-2">Share</a>
+            <a href="" class="p-2"><i class="fa fa-share"></i>Share</a>
         </div>
     @empty
         <h5>No questions</h5>
