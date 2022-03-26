@@ -13,14 +13,13 @@ class CommentController extends Controller
         $this->validate($request,[
             'body'=>'required'
         ]);
+       $comment=new Comment();
+       $comment->body=$request->body;
+       $comment->user_id=auth()->user()->id;
+       $question->comments()->save($comment);
 
-       // $comment=new Comment();
-       // $comment->body=$request->body;
-       // $comment->user_id=auth()->user()->id;
-       // $question->comments()->save($comment);
-
-        $question->addComment($request->body);
-        $question->user->notify(new RepliedToQuestion($question));
+        // $question->addComment($request->body);
+        // $question->user->notify(new RepliedToQuestion($question));
         return back()->withSuccess('comment posted');
     }
 
@@ -35,6 +34,7 @@ class CommentController extends Controller
         return back()->withSuccess('Reply posted');
     }
 
+    
     /**
      * Update the specified resource in storage.
      *

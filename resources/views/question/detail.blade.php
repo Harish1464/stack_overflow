@@ -22,12 +22,42 @@
 
         <div class="comment">
             @forelse($question->comments as $comment)
-                <h5>{{$comment->body}}</h5>
-                <lead>{{$comment->user->name}}</lead>
+                <h6>{{$comment->body}}</h6>
+                <lead>By: {{$comment->user->name}}</lead>
                 <div class="d-flex w-100 justify-content-start">
-                        <a href="{{route('comment.edit', $comment)}}" class="p-2">Edit</a>            
-                        <a href="javascript:;" id="delete-btn" class="p-2"> <i class="fa fa-trash"></i> Delete</a>
-                        <form action="{{route('comment.delete', $comment)}}" method="delete"></form>
+                    <a data-toggle="modal" href="#{{$comment->id}}" class="p-2">edit</a>
+                    <div class="modal fade" id="{{$comment->id}}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;
+                                    </button>
+                                    <h4 class="modal-title">Modal title</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="comment-form">
+
+                                        <form action="{{route('comment.update',$comment->id)}}" method="post" role="form">
+                                            {{csrf_field()}}
+                                            {{method_field('put')}}
+                                            <legend>Edit comment</legend>
+
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" name="body" id=""
+                                                       placeholder="Input..." value="{{$comment->body}}">
+                                            </div>
+
+
+                                            <button type="submit" class="btn btn-primary">Update</button>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->
+                    <a href="javascript:;" id="delete-btn" class="p-2"> <i class="fa fa-trash"></i> Delete</a>
+                    <form action="{{route('comment.delete', $comment)}}" method="delete"></form>
                 </div>
                 {{--reply to comment--}}
                 @foreach($comment->comments as $reply )
@@ -54,10 +84,13 @@
                 @csrf
                 <legend>Create comment</legend>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="body" id="" placeholder="Place your comment on this question">
+                    <input type="text" class="form-control" name="body" id="" placeholder="Place your comment on this question" value="{{isset($comment)? $comment->body: old('body')}}">
                 </div>
                 <button type="submit" class="btn btn-primary mt-2">Comment</button>
             </form>
         </div>
     </div>
+
+
+    
 @endsection

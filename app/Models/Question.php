@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Comment;
+use App\Trait\CommentableTrait;
 
 class Question extends Model
 {
-    use HasFactory;
+    use HasFactory, CommentableTrait;
     protected $fillable = [
         'user_id',
         'title',
@@ -22,22 +23,6 @@ class Question extends Model
     }
 
 
-    public function comments()
-    {
-        return $this->morphMany(Comment::class,'commentable')->latest();
-    }
-
-
-    public function addComment($body)
-    {
-        $comment=new Comment();
-        $comment->body=$body;
-        $comment->user_id=auth()->user()->id;
-
-        $this->comments()->save($comment);
-
-        return $comment;
-    }
 
 
 }
