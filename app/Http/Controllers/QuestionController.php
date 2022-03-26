@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Question;
+use App\Models\Achievment;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
@@ -44,10 +45,15 @@ class QuestionController extends Controller
         //store
         $question = auth()->user()->questions()->create($request->all());
 
-        // $question->tags()->attach($request->tags);
-
-        //redirect
-        return redirect()->route('forum-page')->withSuccess('Question posted!');
+            if($question->count()==1){
+                $achievment = Achievment::create([
+                    'user_id' => auth()->user()->id,
+                    'achievment_type_id' => 1,
+                ]);
+                return redirect()->route('forum-page')->with('achievment', 'Congratulation ! You got First Question Achievment.');
+            }else{
+                return redirect()->route('forum-page')->withSuccess('Question posted!');
+            }    
     }
 
     /**

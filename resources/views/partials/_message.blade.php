@@ -17,6 +17,15 @@
     <div class="alert alert-danger">{{session('error')}}</div>
 @endif
 
+@if(session('achievment'))
+    <div class="alert alert-warning">
+        <p><strong>WoW !!</strong></p>
+        <ul>
+            <li>{{session('achievment')}}</li>
+        </ul>
+    </div>
+@endif
+
 @if(session()->has('failures'))
     <table class="table table-danger">
         <tr>

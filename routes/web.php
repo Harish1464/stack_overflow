@@ -33,10 +33,10 @@ Route::group(['middleware'=> 'auth'], function(){
 });
 
 
-Route::get('/comment/edit/{comment}', [CommentController::class, 'edit'])->name('comment.edit');
+Route::get('/comment/edit/{question}/{comment}', [CommentController::class, 'edit'])->name('comment.edit');
 Route::post('/comment/update/{comment}', [CommentController::class, 'update'])->name('comment.update');
-Route::get('/comment/delete/{comment}', [CommentController::class, 'destroy'])->name('comment.delete');
+Route::get('/comment/delete/{question}/{comment}', [CommentController::class, 'destroy'])->name('comment.delete');
 
-Route::post('comment/create/{question}',[CommentController::class, 'addQuestionComment'])->name('questioncomment.store');
+Route::post('comment/create/{question}',[CommentController::class, 'addQuestionComment'])->name('comment.store');
 
 Route::post('reply/create/{comment}',[CommentController::class, 'addReplyComment'])->name('replycomment.store');

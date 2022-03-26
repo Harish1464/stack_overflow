@@ -1,5 +1,8 @@
 
 @extends('layouts.front')
+@section('title')
+    {{"Ask Question"}}
+@endsection
 @section('content')
     <div class="col-md-12 mt-2">
         <h3 class="p-5">Ask a public questions</h3>

@@ -1,5 +1,8 @@
 
 @extends('layouts.front')
+@section('title')
+    {{"Forum"}}
+@endsection
 @section('content')
 
     <div class="card text-white bg-light mt-2 mb-2">

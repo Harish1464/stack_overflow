@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Question;
+use App\Models\Achievment;
 
 class User extends Authenticatable
 {
@@ -43,8 +44,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-      public function questions()
+      
+    public function questions()
     {
         return $this->hasMany(Question::class);
+    }
+
+    public function achievment()
+    {
+        return $this->hasMany(Achievment::class);
     }
 }
